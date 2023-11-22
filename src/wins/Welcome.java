@@ -1,7 +1,10 @@
 package wins;
 
+import wins.otherwins.RegisterMember;
+import wins.otherwins.RecentSales;
+import wins.otherwins.ViewMembers;
+
 import javax.swing.*;
-import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -14,7 +17,7 @@ public class Welcome {
         frame.setLayout(null);
 
         JLabel mainLabel = new JLabel("Welcome, Maringo Sports Club Management System",SwingConstants.CENTER);
-        mainLabel.setFont(new Font(null,Font.BOLD,18));
+        mainLabel.setFont(new Font(null,Font.BOLD,20));
         mainLabel.setForeground(Color.BLUE);
         mainLabel.setBounds(25,10,700,40);
         mainLabel.setBorder(new LoginForm.RoundBorder(4));
@@ -42,15 +45,13 @@ public class Welcome {
         viewmember.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //viewmember.setEnabled(false);
-                viewmember.setForeground(Color.RED);
 
+                viewmember.setForeground(Color.RED);
                 Timer timer = new Timer(200, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new ViewMembers(frame);
                     }
                 });
                 timer.setRepeats(false);
@@ -75,8 +76,10 @@ public class Welcome {
             @Override
             public void mouseExited(MouseEvent e) {
                 viewmember.setBackground(Color.WHITE);
+                viewmember.setForeground(Color.BLACK);
             }
         });
+
         memberPanel.add(viewmember);
         JLabel registermember = new JLabel("Register Member",SwingConstants.CENTER);
         registermember.setForeground(Color.ORANGE);
@@ -86,15 +89,13 @@ public class Welcome {
         registermember.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //viewmember.setEnabled(false);
-                registermember.setForeground(Color.RED);
 
+                registermember.setForeground(Color.RED);
                 Timer timer = new Timer(200, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new RegisterMember(frame);
                     }
                 });
                 timer.setRepeats(false);
@@ -119,11 +120,11 @@ public class Welcome {
             @Override
             public void mouseExited(MouseEvent e) {
                 registermember.setBackground(Color.WHITE);
+                registermember.setForeground(Color.YELLOW);
             }
         });
 
         memberPanel.add(registermember);
-
         frame.add(memberPanel);
 
         JLabel gamesLabel = new JLabel("Games and Fee Facilitation");
@@ -178,6 +179,7 @@ public class Welcome {
             @Override
             public void mouseExited(MouseEvent e) {
                 viewGames.setBackground(Color.WHITE);
+                viewGames.setForeground(Color.BLACK);
             }
         });
 
@@ -222,12 +224,13 @@ public class Welcome {
             @Override
             public void mouseExited(MouseEvent e) {
                 newEvent.setBackground(Color.WHITE);
+                newEvent.setForeground(Color.ORANGE);
             }
         });
 
         gamesPanel.add(newEvent);
         JLabel pastEvents = new JLabel("View Past Events",SwingConstants.CENTER);
-        pastEvents.setBounds(160,10,130,30);
+        pastEvents.setBounds(160,50,130,30);
         pastEvents.setBorder(new LoginForm.RoundBorder(4));
         pastEvents.setOpaque(true);
         pastEvents.addMouseListener(new MouseListener() {
@@ -266,6 +269,7 @@ public class Welcome {
             @Override
             public void mouseExited(MouseEvent e) {
                 pastEvents.setBackground(Color.WHITE);
+                pastEvents.setForeground(Color.BLACK);
             }
         });
 
@@ -323,13 +327,13 @@ public class Welcome {
             @Override
             public void mouseExited(MouseEvent e) {
                 items.setBackground(Color.WHITE);
+                items.setForeground(Color.BLACK);
             }
         });
 
         storePanel.add(items);
         JLabel newSale = new JLabel("New Sale",SwingConstants.CENTER);
         newSale.setForeground(Color.ORANGE);
-        newSale.setFont(new Font(null,Font.BOLD,12));
         newSale.setBounds(10,50,130,30);
         newSale.setBorder(new LoginForm.RoundBorder(4));
         newSale.setOpaque(true);
@@ -369,10 +373,54 @@ public class Welcome {
             @Override
             public void mouseExited(MouseEvent e) {
                 newSale.setBackground(Color.WHITE);
+                newSale.setForeground(Color.ORANGE);
             }
         });
 
         storePanel.add(newSale);
+
+        JLabel recentSales = new JLabel("Recent Sales",SwingConstants.CENTER);
+        recentSales.setFont(new Font(null,Font.BOLD,12));
+        recentSales.setBounds(160,50,130,30);
+        recentSales.setBorder(new LoginForm.RoundBorder(4));
+        recentSales.setOpaque(true);
+        recentSales.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                recentSales.setForeground(Color.RED);
+
+                Timer timer = new Timer(200, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        new RecentSales(frame);
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                recentSales.setForeground(Color.BLACK);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                recentSales.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                recentSales.setBackground(Color.WHITE);
+                recentSales.setForeground(Color.BLACK);
+            }
+        });
+        storePanel.add(recentSales);
         frame.add(storePanel);
 
         JLabel reportsLabel = new JLabel("Generate Reports");

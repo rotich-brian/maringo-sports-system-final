@@ -97,10 +97,10 @@ public class LoginForm {
     public static void main(String[] args) {
         new LoginForm();
     }
-    static class RoundBorder implements Border{
+    public static class RoundBorder implements Border{
         private final int radius;
 
-        RoundBorder(int radius) {
+        public RoundBorder(int radius) {
             this.radius = radius;
         }
 

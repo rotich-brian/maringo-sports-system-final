@@ -1,8 +1,12 @@
 package wins;
 
+import wins.otherwins.RegisterMember;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -96,14 +100,21 @@ public class Login extends JFrame {
         passwordLabel.setBounds(50,125,100,50);
         passwordField.setBounds(125,125,200,50);
 
-        JButton loginButton1 = new JButton("Login");
-        JLabel loginButton = new JLabel("Login",SwingConstants.CENTER);
+        JButton loginButton = new JButton("Login");
+        //JLabel loginButton = new JLabel("Login",SwingConstants.CENTER);
         loginButton.setBorder(new LoginForm.RoundBorder(5));
         loginButton.setForeground(Color.BLUE);
 
         loginButton.setFont(new Font(null,Font.BOLD,18));
         loginButton.setBounds(100,225,200,50);
         loginButton.setFocusable(false);
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RegisterMember(new JFrame());
+            }
+        });
 
         panel.add(usernameLabel);
         panel.add(userTextField);

@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7708a18d-089c-43a6-b6f0-9faf1694de35" name="Changes" comment="Final Touches">
-      <change afterPath="$PROJECT_DIR$/src/res/welcome_background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/BeautifulCheckBoxApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/ChooseGames.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/GameFac.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/GameFacilitation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/GameSelectorApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/RecentSales.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/RegisterMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/TextFieldExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/ViewItems.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wins/otherwins/ViewMembers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MARINGO SPORTS SYSTEM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MARINGO SPORTS SYSTEM.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wins/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/wins/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wins/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/wins/LoginForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wins/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/wins/Welcome.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,15 +44,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/iNB.BRIANNRT/Desktop/1Folder Projects/1Folder Java/MARINGO SPORTS CLUB SYSTEM"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/iNB.BRIANNRT/Downloads/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -55,7 +72,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700572287474</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Final Touches">
+      <created>1700572432536</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700572432536</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -81,6 +105,26 @@
           <url>file://$PROJECT_DIR$/src/Main.java</url>
           <line>5</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/wins/Welcome.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/wins/otherwins/GameFac.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/wins/otherwins/GameFacilitation.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/wins/otherwins/GameFac.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
