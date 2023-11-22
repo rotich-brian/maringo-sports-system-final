@@ -11,9 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 
-public class RecentSales {
+public class SalesReport {
     private JFrame previousWindow;
-    public RecentSales(JFrame previousWindow){
+    public SalesReport(JFrame previousWindow){
         JFrame frame = new JFrame();
         frame.setTitle("Recent Sales");
         frame.setLayout(null);

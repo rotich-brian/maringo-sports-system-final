@@ -11,16 +11,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 
-public class RecentSales {
+public class EventsReport {
     private JFrame previousWindow;
-    public RecentSales(JFrame previousWindow){
+    public EventsReport(JFrame previousWindow){
         JFrame frame = new JFrame();
-        frame.setTitle("Recent Sales");
+        frame.setTitle("Past Events");
         frame.setLayout(null);
 
         JPanel panel1 = new JPanel();
         panel1.setLayout(null);
-        panel1.setBounds(10,10,500,400);
+        panel1.setBounds(150,10,500,530);
         panel1.setBackground(new Color(255,255,255,80));
 
         frame.add(panel1);
@@ -30,9 +30,9 @@ public class RecentSales {
         panel2.setBounds(515,10,250,400);
         panel2.setBackground(new Color(255,255,255,80));
 
-        frame.add(panel2);
+        //frame.add(panel2);
 
-        JLabel patronLabel = new JLabel("Store Clerk",SwingConstants.CENTER);
+        JLabel patronLabel = new JLabel("Games Patron",SwingConstants.CENTER);
         patronLabel.setBounds(10,10,100,30);
         patronLabel.setFont(new Font("Arial", Font.BOLD, 16));
         patronLabel.setFocusable(false);
@@ -42,7 +42,7 @@ public class RecentSales {
         JTextField txtStoreClerk = new JTextField(12);
         txtStoreClerk.setBounds(10,50,200,30);
         txtStoreClerk.setFont(new Font("Arial", Font.BOLD, 14));
-        txtStoreClerk.setText("Emmanuel Abunuwasi");
+        txtStoreClerk.setText("Ivano Osaka");
         txtStoreClerk.setForeground(Color.blue);
         txtStoreClerk.setEditable(false);
 
@@ -135,10 +135,10 @@ public class RecentSales {
             }
         });
 
-        JButton backButton = new JButton("BACK");
+        JButton backButton = new JButton("CLOSE REPORT");
         backButton.setFocusable(false);
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
-        backButton.setBounds(10,350,150,30);
+        backButton.setBounds(130,480,200,30);
         backButton.setPreferredSize(new Dimension(200,50));
         backButton.setBackground(new Color(50, 64, 64));
         backButton.setForeground(Color.white);
@@ -165,7 +165,7 @@ public class RecentSales {
             }
         });
         //mainPanel.add(membersPanel);
-        panel2.add(backButton);
+        panel1.add(backButton);
         panel2.add(newSaleButton);
 
         frame.setSize(800,600);

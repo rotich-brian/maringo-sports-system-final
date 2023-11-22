@@ -174,6 +174,6 @@ public class PastEvents {
         frame.setVisible(true);
     }
     public static void main(String[] args) {
-        new PastEvents(new JFrame());
+        new EventsReport(new JFrame());
     }
 }

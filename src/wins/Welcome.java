@@ -238,7 +238,7 @@ public class Welcome {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        new PastEvents(new JFrame());
+                        new EventsReport(new JFrame());
                     }
                 });
                 timer.setRepeats(false);
@@ -382,7 +382,7 @@ public class Welcome {
                 Timer timer = new Timer(200, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        new RecentSales(frame);
+                        new SalesReport(frame);
                     }
                 });
                 timer.setRepeats(false);
@@ -529,8 +529,7 @@ public class Welcome {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new SalesReport(frame);
                     }
                 });
                 timer.setRepeats(false);
