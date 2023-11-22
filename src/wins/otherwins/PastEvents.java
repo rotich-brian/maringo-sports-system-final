@@ -11,11 +11,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 
-public class RecentSales {
+public class PastEvents {
     private JFrame previousWindow;
-    public RecentSales(JFrame previousWindow){
+    public PastEvents(JFrame previousWindow){
         JFrame frame = new JFrame();
-        frame.setTitle("Recent Sales");
+        frame.setTitle("Past Events");
         frame.setLayout(null);
 
         JPanel panel1 = new JPanel();
@@ -32,7 +32,7 @@ public class RecentSales {
 
         frame.add(panel2);
 
-        JLabel patronLabel = new JLabel("Store Clerk",SwingConstants.CENTER);
+        JLabel patronLabel = new JLabel("Games Patron",SwingConstants.CENTER);
         patronLabel.setBounds(10,10,100,30);
         patronLabel.setFont(new Font("Arial", Font.BOLD, 16));
         patronLabel.setFocusable(false);
@@ -42,7 +42,7 @@ public class RecentSales {
         JTextField txtStoreClerk = new JTextField(12);
         txtStoreClerk.setBounds(10,50,200,30);
         txtStoreClerk.setFont(new Font("Arial", Font.BOLD, 14));
-        txtStoreClerk.setText("Emmanuel Abunuwasi");
+        txtStoreClerk.setText("Ivano Osaka");
         txtStoreClerk.setForeground(Color.blue);
         txtStoreClerk.setEditable(false);
 

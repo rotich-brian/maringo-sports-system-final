@@ -11,9 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 
-public class RecentSales {
+public class ViewGames {
     private JFrame previousWindow;
-    public RecentSales(JFrame previousWindow){
+    public ViewGames(JFrame previousWindow){
         JFrame frame = new JFrame();
         frame.setTitle("Recent Sales");
         frame.setLayout(null);
@@ -32,9 +32,9 @@ public class RecentSales {
 
         frame.add(panel2);
 
-        JLabel patronLabel = new JLabel("Store Clerk",SwingConstants.CENTER);
-        patronLabel.setBounds(10,10,100,30);
-        patronLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        JLabel patronLabel = new JLabel("Sports Director",SwingConstants.CENTER);
+        patronLabel.setBounds(10,10,120,30);
+        patronLabel.setFont(new Font("Arial", Font.BOLD, 14));
         patronLabel.setFocusable(false);
 
         panel2.add(patronLabel);
@@ -42,18 +42,18 @@ public class RecentSales {
         JTextField txtStoreClerk = new JTextField(12);
         txtStoreClerk.setBounds(10,50,200,30);
         txtStoreClerk.setFont(new Font("Arial", Font.BOLD, 14));
-        txtStoreClerk.setText("Emmanuel Abunuwasi");
+        txtStoreClerk.setText("Kimani Ichungwa");
         txtStoreClerk.setForeground(Color.blue);
         txtStoreClerk.setEditable(false);
 
         panel2.add(txtStoreClerk);
 
-        JLabel membersLabel = new JLabel("MARINGO SPORTS CLUB STORE",SwingConstants.CENTER);
-        membersLabel.setBounds(30,10,420,30);
-        membersLabel.setBorder(new LoginForm.RoundBorder(4));
-        membersLabel.setFont(new Font("Verdana", Font.BOLD, 12));
-        membersLabel.setFocusable(false);
-        panel1.add(membersLabel);
+        JLabel mainLabel = new JLabel("MARINGO CLUB SPORTS CENTER",SwingConstants.CENTER);
+        mainLabel.setBounds(30,10,420,30);
+        mainLabel.setBorder(new LoginForm.RoundBorder(4));
+        mainLabel.setFont(new Font("Verdana", Font.BOLD, 12));
+        mainLabel.setFocusable(false);
+        panel1.add(mainLabel);
 
         String url = "jdbc:mysql://localhost:3306/maringodatabase";
         String username = "root";
@@ -65,7 +65,7 @@ public class RecentSales {
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM `sale_items`");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM `games`");
 
             tableModel = new DefaultTableModel();
             ResultSetMetaData metaData = resultSet.getMetaData();
@@ -99,7 +99,7 @@ public class RecentSales {
         table.setFillsViewportHeight(true);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(30,60,420,400);
+        scrollPane.setBounds(20,60,440,400);
         scrollPane.setBorder(new LoginForm.RoundBorder(4));
         scrollPane.setViewportView(table);
 
@@ -166,7 +166,7 @@ public class RecentSales {
         });
         //mainPanel.add(membersPanel);
         panel2.add(backButton);
-        panel2.add(newSaleButton);
+        //panel2.add(newSaleButton);
 
         frame.setSize(800,600);
         frame.setLocationRelativeTo(null);
@@ -174,6 +174,6 @@ public class RecentSales {
         frame.setVisible(true);
     }
     public static void main(String[] args) {
-        new PastEvents(new JFrame());
+        new ViewGames(new JFrame());
     }
 }

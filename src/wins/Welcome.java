@@ -1,8 +1,6 @@
 package wins;
 
-import wins.otherwins.RegisterMember;
-import wins.otherwins.RecentSales;
-import wins.otherwins.ViewMembers;
+import wins.otherwins.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -152,9 +150,7 @@ public class Welcome {
                 Timer timer = new Timer(200, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new ViewGames(frame);
                     }
                 });
                 timer.setRepeats(false);
@@ -198,8 +194,7 @@ public class Welcome {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new GameFacilitation();
                     }
                 });
                 timer.setRepeats(false);
@@ -243,8 +238,7 @@ public class Welcome {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new PastEvents(new JFrame());
                     }
                 });
                 timer.setRepeats(false);
@@ -300,9 +294,7 @@ public class Welcome {
                 Timer timer = new Timer(200, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new ViewItems(frame);
                     }
                 });
                 timer.setRepeats(false);
@@ -346,9 +338,7 @@ public class Welcome {
                 Timer timer = new Timer(200, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
-                        new Login();
-                        //viewmember.setEnabled(true);
+                        new NewSale();
                     }
                 });
                 timer.setRepeats(false);

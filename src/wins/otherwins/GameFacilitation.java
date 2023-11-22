@@ -1,163 +1,251 @@
 package wins.otherwins;
 
+import wins.LoginForm;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
+import java.sql.*;
 
 public class GameFacilitation {
-    JFrame gframe;
-    JPanel mygPanel, tPanel;
-    JLabel gtitleLabel, gameLabel, patronNameLabel, eventsLabel, noOfMembersLabel, amountLabel, showAmountLabel, totalLabel, patronCommissionLabel, commissionLabel, errorLabel, damagesLabel, damagesCostLabel;
-    JTextField patronNameField, noOfMembersField, damagesCostField, costFineField;
-    JComboBox<String> gameBox;
-    JRadioButton internalRadioButton, externalRadioButton, yesRadioButton, noRadioButton;
-    JButton totalButton, costFineButton, payButton, backButton;
+    JFrame frame = new JFrame();
+    JTextField patronNameField;
+    JRadioButton internal;
+    JRadioButton external;
+    JTextField membersField;
+    JLabel showAmountLabel;
+    JLabel totalLabel;
+    JLabel commissionLabel;
+    JLabel errorLabel;
+    JRadioButton yesRadioButton,noRadioButton;
+    JLabel damagesCostLabel;
+    JTextField damagesCostField, costFineField;
+    JButton payButton,costFineButton;
     private final double internalFee = 0.0;
     private final double externalFee = 500.0;
     boolean costFineButtonIsClicked = false;
     public GameFacilitation(){
+        frame.setTitle("Game Facilitation");
+        frame.setSize(800,600);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(null);
 
-        gframe = new JFrame("MARINGO");
-        gframe.setSize(800,600);
-        gframe.setLayout(new BorderLayout());
+        JLabel title = new  JLabel("Manage Game events and Fee Facilitation",SwingConstants.CENTER);
+        title.setForeground(Color.BLUE);
+        title.setFont(new Font("Arial",Font.BOLD,16));
+        title.setBorder(new LoginForm.RoundBorder(4));
+        title.setBounds(25,25,725,30);
+        frame.add(title);
 
-        tPanel = new JPanel();
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(null);
+        panel1.setBorder(new LoginForm.RoundBorder(4));
+        panel1.setBackground(new Color(255,255,255,200));
+        panel1.setBounds(25,65,350,150);
 
-        gtitleLabel = new  JLabel("Game Facilitation");
-        Font font = new Font("Arial", Font.BOLD, 16);
-        gtitleLabel.setForeground(Color.BLUE);
-        gtitleLabel.setFont(font);
+        JLabel game = new JLabel("Choose Game",SwingConstants.CENTER);
+        //game.setBorder(new LoginForm.RoundBorder(4));
+        game.setBounds(15,10,300,30);
+        panel1.add(game);
 
-        tPanel.add(gtitleLabel);
-
-
-        mygPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        gameLabel = new  JLabel("Game");
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(5,5,5,5);
-        mygPanel.add(gameLabel, gbc);
-
-        String[] games = {"Football", "Rugby", "Volleyball", "Basketball", "Netball", "Hockey", "Tennis", "Swimming", "Chess", "Darts", "Draft"};
-        gameBox = new JComboBox<String>(games);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        mygPanel.add(gameBox, gbc);
+        String[] games = {"select","Football", "Rugby", "Volleyball", "Basketball", "Netball",
+                "Hockey", "Tennis", "Swimming", "Chess", "Darts", "Draft"};
+        JComboBox<String> gameBox = new JComboBox<>(games);
 
         gameBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
-                    internalRadioButton.setEnabled(true);
-                    externalRadioButton.setEnabled(true);
+                    patronNameField.setEnabled(true);
+                    internal.setEnabled(true);
+                    external.setEnabled(true);
                     yesRadioButton.setEnabled(true);
                     noRadioButton.setEnabled(true);
                     String selectedGame = (String) gameBox.getSelectedItem();
                     patronNameField.setText(getPatronName(selectedGame));
+//                    String url = "jdbc:mysql://localhost:3306/maringodatabase";
+//                    String username = "root";
+//                    String password = "";
+
+//                    try {
+//                        Class.forName("com.mysql.cj.jdbc.Driver");
+//
+//                        Connection connection = DriverManager.getConnection(url,username,password);
+//                        System.out.println("Connected!");
+//
+//                        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `games`(`Game`, `Members`, `Patron`) VALUES (?,?,?)");
+//                        preparedStatement.setString(1, (String) gameBox.getSelectedItem());
+//                        preparedStatement.setInt(2, 26);
+//                        preparedStatement.setString(3, patronNameField.getText());
+//                        preparedStatement.executeUpdate();
+//
+//                        Statement statement = connection.createStatement();
+//
+//                        //statement.executeUpdate("INSERT INTO members(`Full Name`, `Next of Kin`, `Year of Birth`,`Contact Details`, `Sub-Counties`, `School`,`Games of Interest`,`Gender`,`Weight`,`Height`,`Special Needs`,`Membership`,`Group Name`,`Fee`) VALUES (`"+Full_Name+"`,`"+Next_of_Kin+"`,`"+Year_of_Birth+"`,`"+Contact_Details+"`,`"+Sub_Counties+"`,`"+School+"`,`"+Games_of_Interest+"`,`"+Gender+"`,`"+Weight+"`,`"+Height+"`,`"+Special_Needs+"`,`"+Membership+"`,`"+Group_Name+"`,`"+Fee+"`)");
+//
+//                        ResultSet resultSet = statement.executeQuery("SELECT * FROM members");
+//
+//                        while ((resultSet.next())) {
+//                            //System.out.println(resultSet.getInt(1)+" "+resultSet.getString(2)+" "+resultSet.getInt(3));
+//                        }
+//
+//                        resultSet.close();
+//                        connection.close();
+//
+//                    } catch (Exception e1) {
+//                        System.out.println(e1);
+//                        e1.printStackTrace();
+//                    }
+
+                  //  INSERT INTO `games`(`Game`, `Members`, `Patron`, `Captain`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')
                 }
             }
         });
 
-        patronNameLabel = new  JLabel("Patron Name");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        mygPanel.add(patronNameLabel, gbc);
+        gameBox.setBounds(15,50,300,30);
+        panel1.add(gameBox);
 
-        patronNameField = new JTextField(20);
+        JLabel patronName = new JLabel("Game Patron");
+        patronName.setBounds(15,90,120,30);
+        panel1.add(patronName);
+        patronNameField = new JTextField();
+        patronNameField.setBounds(130,90,185,30);
+        patronNameField.setFont(new Font(null,Font.BOLD,12));
         patronNameField.setEditable(false);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        mygPanel.add(patronNameField, gbc);
+        patronNameField.setEnabled(false);
+        panel1.add(patronNameField);
 
-        eventsLabel = new  JLabel("Event:");
-        eventsLabel.setFont(font);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        mygPanel.add(eventsLabel, gbc);
+        frame.add(panel1);
 
-        internalRadioButton = new JRadioButton("Internal");
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        mygPanel.add(internalRadioButton, gbc);
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(null);
+        panel2.setBorder(new LoginForm.RoundBorder(4));
+        panel2.setBackground(new Color(255,255,255,200));
+        panel2.setBounds(25,230,350,135);
 
-        internalRadioButton.addItemListener(new ItemListener() {
+        JLabel event = new JLabel("Team Event vs:");
+        event.setBounds(15,10,100,30);
+        panel2.add(event);
+        ButtonGroup buttonGroup = new ButtonGroup();
+        internal = new JRadioButton("Internal Team");
+        internal.setBorder(new LoginForm.RoundBorder(4));
+        internal.setBounds(120,10,150,30);
+        internal.setFocusable(false);
+        internal.setEnabled(false);
+
+        internal.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    noOfMembersField.setEditable(true);
+                    membersField.setEditable(true);
                     showAmountLabel.setText(String.valueOf(internalFee));
                 }
             }
         });
+        buttonGroup.add(internal);
+        panel2.add(internal);
 
-        externalRadioButton = new JRadioButton("External");
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        mygPanel.add(externalRadioButton, gbc);
+        external = new JRadioButton("External Team");
+        external.setBounds(120,50,150,30);
+        external.setFocusable(false);
+        external.setEnabled(false);
 
-        externalRadioButton.addItemListener(new ItemListener() {
+        external.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
-                    noOfMembersField.setEditable(true);
+                    membersField.setEditable(true);
                     showAmountLabel.setText(String.valueOf(externalFee));
                 }
             }
         });
+        buttonGroup.add(external);
+        panel2.add(external);
 
-        internalRadioButton.setEnabled(false);
-        externalRadioButton.setEnabled(false);
-
-        ButtonGroup tournaments = new ButtonGroup();
-        tournaments.add(internalRadioButton);
-        tournaments.add(externalRadioButton);
-
-        noOfMembersLabel = new  JLabel("No of Members");
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        mygPanel.add(noOfMembersLabel, gbc);
-
-        noOfMembersField = new JTextField(5);
-        noOfMembersField.setEditable(false);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        mygPanel.add(noOfMembersField, gbc);
-
-        amountLabel = new  JLabel("Amount");
-        gbc.gridx = 2;
-        gbc.gridy = 4;
-        mygPanel.add(amountLabel, gbc);
+        JLabel amount = new JLabel("Amount per Member");
+        amount.setBounds(15,90,120,30);
+        panel2.add(amount);
 
         showAmountLabel = new JLabel();
-        gbc.gridx = 3;
-        gbc.gridy = 4;
-        mygPanel.add(showAmountLabel, gbc);
+        showAmountLabel.setBounds(150,90,120,30);
+        showAmountLabel.setFont(new Font(null,Font.BOLD,12));
+        showAmountLabel.setOpaque(true);
+        panel2.add(showAmountLabel);
 
-        totalButton = new  JButton("Total Amount");
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        mygPanel.add(totalButton, gbc);
+        frame.add(panel2);
+
+        JPanel panel3 = new JPanel();
+        panel3.setLayout(null);
+        panel3.setBorder(new LoginForm.RoundBorder(4));
+        panel3.setForeground(Color.BLUE);
+        panel3.setBackground(new Color(255,255,255,200));
+        panel3.setBounds(25,380,350,150);
+
+        JLabel members = new JLabel("No of Members");
+        members.setBounds(10,10,120,30);
+        panel3.add(members);
+        membersField = new JTextField();
+        membersField.setBounds(150,10,120,30);
+        membersField.setFont(new Font(null,Font.BOLD,12));
+        membersField.setEditable(false);
+
+        membersField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                textChanged();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                textChanged();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // Plain text components do not fire these events
+            }
+
+            private void textChanged() {
+                // This method will be called when the text changes
+                try {
+                    errorLabel.setText("");
+
+                    double members = Double.parseDouble(membersField.getText());
+                    double amount = Double.parseDouble(showAmountLabel.getText());
+
+                    double total = members * amount;
+                    double patronCommission = total * 0.20;
+
+                    totalLabel.setText(String.valueOf(total));
+                    commissionLabel.setText(String.valueOf(patronCommission));
+
+                    membersField.requestFocus();
+                } catch (NumberFormatException e1) {
+                    errorLabel.setText("Enter Valid Input!");
+                }
+            }
+        });
+        panel3.add(membersField);
+
+        JButton totalButton = new JButton("Compute Total");
+        totalButton.setFocusable(false);
+        totalButton.setBounds(10,50,120,30);
 
         totalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(noOfMembersField.getText().isEmpty()){
-                    errorLabel.setText("Please Enter No of Members!");
-                    if(!internalRadioButton.isSelected() && !externalRadioButton.isSelected()){
-                        errorLabel.setText("Please Select Event!");
+                if(membersField.getText().isEmpty()){
+                    errorLabel.setText("Please Enter Number of Members!");
+                    if(!internal.isSelected() && !external.isSelected()){
+                        errorLabel.setText("Please specify team Event!");
                     }
                 }else {
                     try {
                         errorLabel.setText("");
 
-                        double members = Double.parseDouble(noOfMembersField.getText());
+                        double members = Double.parseDouble(membersField.getText());
                         double amount = Double.parseDouble(showAmountLabel.getText());
 
                         double total = members * amount;
@@ -172,37 +260,37 @@ public class GameFacilitation {
 
             }
         });
+        panel3.add(totalButton);
 
         totalLabel = new JLabel();
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        mygPanel.add(totalLabel, gbc);
-
-        patronCommissionLabel = new JLabel("Patron's Commission");
-        gbc.gridx = 2;
-        gbc.gridy = 5;
-        mygPanel.add(patronCommissionLabel, gbc);
-
+        totalLabel.setBounds(150,50,120,30);
+        totalLabel.setOpaque(true);
+        panel3.add(totalLabel);
+        JLabel patronCommissionLabel = new JLabel("Patron Commission");
+        patronCommissionLabel.setBounds(10,90,120,30);
+        panel3.add(patronCommissionLabel);
         commissionLabel = new JLabel();
-        gbc.gridx = 3;
-        gbc.gridy = 5;
-        mygPanel.add(commissionLabel, gbc);
+        commissionLabel.setBounds(150,90,120,30);
+        commissionLabel.setOpaque(true);
+        panel3.add(commissionLabel);
 
-        errorLabel = new JLabel();
-        errorLabel.setForeground(Color.RED);
-        gbc.gridx = 1;
-        gbc.gridy = 13;
-        mygPanel.add(errorLabel, gbc);
+        frame.add(panel3);
 
-        damagesLabel = new JLabel("Any Damages?");
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        mygPanel.add(damagesLabel, gbc);
+        JPanel panel4 = new JPanel();
+        panel4.setLayout(null);
+        panel4.setBorder(new LoginForm.RoundBorder(4));
+        panel4.setForeground(Color.RED);
+        panel4.setBackground(new Color(255,255,255,255));
+        panel4.setBounds(400,65,350,230);
+        panel4.setOpaque(true);
 
+        ButtonGroup damage = new ButtonGroup();
+        JLabel damagesLabel = new JLabel("Any Damages?");
+        damagesLabel.setBounds(10,10,120,30);
+        panel4.add(damagesLabel);
         yesRadioButton = new JRadioButton("Yes");
-        gbc.gridx = 1;
-        gbc.gridy = 7;
-        mygPanel.add(yesRadioButton, gbc);
+        yesRadioButton.setBounds(150,10,150,30);
+        yesRadioButton.setEnabled(false);
 
         yesRadioButton.addItemListener(new ItemListener() {
             @Override
@@ -218,11 +306,12 @@ public class GameFacilitation {
                 }
             }
         });
+        damage.add(yesRadioButton);
+        panel4.add(yesRadioButton);
 
         noRadioButton = new JRadioButton("No");
-        gbc.gridx = 1;
-        gbc.gridy = 8;
-        mygPanel.add(noRadioButton, gbc);
+        noRadioButton.setBounds(150,50,150,30);
+        noRadioButton.setEnabled(false);
 
         noRadioButton.addItemListener(new ItemListener() {
             @Override
@@ -232,31 +321,22 @@ public class GameFacilitation {
                 }
             }
         });
-
-        yesRadioButton.setEnabled(false);
-        noRadioButton.setEnabled(false);
-
-        ButtonGroup damage = new ButtonGroup();
-        damage.add(yesRadioButton);
         damage.add(noRadioButton);
+        panel4.add(noRadioButton);
 
         damagesCostLabel = new JLabel("Market Value of Damages");
+        damagesCostLabel.setBounds(10,90,120,30);
         damagesCostLabel.setVisible(false);
-        gbc.gridx = 0;
-        gbc.gridy = 9;
-        mygPanel.add(damagesCostLabel, gbc);
-
+        panel4.add(damagesCostLabel);
         damagesCostField = new JTextField(5);
+        damagesCostField.setBounds(150,90,150,30);
         damagesCostField.setVisible(false);
-        gbc.gridx = 1;
-        gbc.gridy = 9;
-        mygPanel.add(damagesCostField, gbc);
+        panel4.add(damagesCostField);
 
         costFineButton = new JButton("Fine For Damages");
+        costFineButton.setBounds(10,130,130,30);
         costFineButton.setVisible(false);
-        gbc.gridx = 0;
-        gbc.gridy = 10;
-        mygPanel.add(costFineButton, gbc);
+        panel4.add(costFineButton);
 
         costFineButton.addActionListener(new ActionListener() {
             @Override
@@ -277,25 +357,23 @@ public class GameFacilitation {
         });
 
         costFineField = new JTextField(5);
+        costFineField.setBounds(150,130,150,30);
         costFineField.setVisible(false);
         costFineField.setEditable(false);
-        gbc.gridx = 1;
-        gbc.gridy = 10;
-        mygPanel.add(costFineField, gbc);
+        panel4.add(costFineField);
 
         payButton = new JButton("Pay For Damages");
+        payButton.setBounds(90,170,150,30);
         payButton.setVisible(false);
-        gbc.gridx = 1;
-        gbc.gridy = 11;
-        mygPanel.add(payButton, gbc);
 
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 if(costFineButtonIsClicked) {
-                    JOptionPane.showInputDialog(null, ("Enter MPesa Number"));
-                    JOptionPane.showMessageDialog(null, "An Mpesa prompt\n Has Been Sent To The MPesa Number\nPlease Enter MPesa Pin To Complete Transaction!\nAmount " + costFineField.getText() + " Will Be Deducted From Your MPesa Account!\n");
+                    JOptionPane.showInputDialog(null, ("Enter Account Number"));
+                    JOptionPane.showMessageDialog(null, "An Request Pay prompt\n Has Been Sent To your Account " +
+                            "\n TOTAL Ksh. " + costFineField.getText()+ " \nPlease Enter PIN To Complete Transaction!");
                     JOptionPane.showMessageDialog(null, "Damages Paid For Successfully!");
                     errorLabel.setText("");
                 } else{
@@ -303,26 +381,68 @@ public class GameFacilitation {
                 }
             }
         });
+        panel4.add(payButton);
 
-        backButton = new JButton("Back");
-        gbc.gridx = 1;
-        gbc.gridy = 12;
-        mygPanel.add(backButton, gbc);
+        frame.add(panel4);
 
-        backButton.addActionListener(new ActionListener() {
+        errorLabel = new JLabel();
+        errorLabel.setBounds(420,290,300,30);
+        errorLabel.setForeground(Color.RED);
+        frame.add(errorLabel);
+
+        JLabel saveEvent = new JLabel("Save Event",SwingConstants.CENTER);
+        saveEvent.setBorder(new LoginForm.RoundBorder(4));
+        saveEvent.setBounds(420,330,250,30);
+        //frame.add(saveEvent);
+
+        JLabel saveEvent1 = new JLabel("Save Event",SwingConstants.CENTER);
+        saveEvent1.setForeground(Color.BLACK);
+        saveEvent1.setBounds(450,330,250,40);
+        saveEvent1.setBorder(new LoginForm.RoundBorder(4));
+        saveEvent1.setOpaque(true);
+        saveEvent1.addMouseListener(new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                gframe.dispose();
-                //mainPage gmainpage = new mainPage();
+            public void mouseClicked(MouseEvent e) {
+
+                saveEvent1.setForeground(Color.RED);
+                Timer timer = new Timer(200, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        new ViewMembers(frame);
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                saveEvent1.setForeground(Color.BLACK);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                saveEvent1.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                saveEvent1.setBackground(Color.WHITE);
+                saveEvent1.setForeground(Color.BLACK);
             }
         });
 
+        frame.add(saveEvent1);
 
-        gframe.add(tPanel, BorderLayout.NORTH);
-        gframe.add(mygPanel, BorderLayout.CENTER);
-        gframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gframe.setLocationRelativeTo(null);
-        gframe.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     private static String getPatronName(String game){
@@ -357,11 +477,7 @@ public class GameFacilitation {
 
     }
 
-
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new GameFacilitation();
-        });
+        new GameFacilitation();
     }
-
 }
